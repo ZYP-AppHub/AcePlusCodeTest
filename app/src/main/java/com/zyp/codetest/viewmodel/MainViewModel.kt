@@ -8,7 +8,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivityViewModel constructor(private val apiService: ApiService) : ViewModel() {
+class MainViewModel constructor(private val apiService: ApiService) : ViewModel() {
 
     val userList = MutableLiveData<List<User>>()
     val errorMessage = MutableLiveData<String>()

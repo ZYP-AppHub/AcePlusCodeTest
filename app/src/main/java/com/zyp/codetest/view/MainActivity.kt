@@ -13,13 +13,13 @@ import com.zyp.codetest.adapter.UserAdapter
 import com.zyp.codetest.api.ApiClient
 import com.zyp.codetest.api.ApiService
 import com.zyp.codetest.databinding.ActivityMainBinding
-import com.zyp.codetest.viewmodel.MainActivityViewModel
+import com.zyp.codetest.viewmodel.MainViewModel
 import com.zyp.codetest.viewmodel.MainViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var viewModel: MainViewModel
 
     private lateinit var apiService: ApiService
 
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(
             this,
             MainViewModelFactory(apiService)
-        ).get(MainActivityViewModel::class.java)
+        ).get(MainViewModel::class.java)
 
         userAdapter = UserAdapter(this)
         binding.recyclerUser.layoutManager = GridLayoutManager(this, 1)
@@ -53,7 +53,12 @@ class MainActivity : AppCompatActivity() {
             showToast(this, it)
             binding.layoutSwipeRefresh.isRefreshing = false
         })
-        viewModel.getAllUsers()
+
+        Handler(mainLooper).postDelayed(
+            Runnable {
+                viewModel.getAllUsers()
+            }, 500
+        )
 
         binding.layoutSwipeRefresh.setOnRefreshListener {
             Handler(mainLooper).postDelayed(

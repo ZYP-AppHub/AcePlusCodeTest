@@ -8,9 +8,9 @@ class MainViewModelFactory constructor(private val apiService: ApiService) :
     ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return if (modelClass.isAssignableFrom(MainActivityViewModel::class.java)) {
+        return if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            MainActivityViewModel(this.apiService) as T
+            MainViewModel(this.apiService) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")
         }
