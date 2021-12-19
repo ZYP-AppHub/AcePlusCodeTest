@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.zyp.codetest.UserDetailActivity
+import com.zyp.codetest.view.UserDetailActivity
 import com.zyp.codetest.databinding.ListItemUserBinding
 import com.zyp.codetest.model.User
 

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.CodeTest"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".UserDetailActivity"
+            android:name=".view.UserDetailActivity"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"

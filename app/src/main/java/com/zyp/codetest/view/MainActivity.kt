@@ -2,6 +2,7 @@ package com.zyp.codetest.view
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -30,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.layoutSwipeRefresh.setColorSchemeResources(R.color.purple_500)
+        binding.layoutSwipeRefresh.isRefreshing = true
+
         apiService = ApiClient.getInstance()
         viewModel = ViewModelProvider(
             this,
@@ -42,12 +46,23 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.userList.observe(this, Observer {
             userAdapter.setItemList(it)
+            binding.layoutSwipeRefresh.isRefreshing = false
         })
 
         viewModel.errorMessage.observe(this, Observer {
             showToast(this, it)
+            binding.layoutSwipeRefresh.isRefreshing = false
         })
         viewModel.getAllUsers()
+
+        binding.layoutSwipeRefresh.setOnRefreshListener {
+            Handler(mainLooper).postDelayed(
+                Runnable {
+                    binding.layoutSwipeRefresh.isRefreshing = true
+                    viewModel.getAllUsers()
+                }, 1000
+            )
+        }
 
     }
 

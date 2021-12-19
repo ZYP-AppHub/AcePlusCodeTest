@@ -1,7 +1,8 @@
-package com.zyp.codetest
+package com.zyp.codetest.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.zyp.codetest.R
 import com.zyp.codetest.databinding.ActivityUserDetailBinding
 import com.zyp.codetest.model.User
 
